@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通讯录管理系统</title>
+    <link rel="stylesheet" href="static/css/styles.css"> <!-- 直接引用静态资源 -->
+</head>
+<body>
+    <h1>通讯录</h1>
+
+    <!-- 添加联系人表单 -->
+    <form id="add-contact-form">
+        <label for="name">姓名:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">电话:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="student_id">学号:</label>
+        <input type="text" id="student_id" name="student_id" required>
+
+        <button type="submit">添加联系人</button>
+    </form>
+
+    <!-- 黑名单按钮 -->
+    <button onclick="viewBlacklist()">查看黑名单</button>
+
+    <!-- 通讯录表格 -->
+    <table>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>电话</th>
+                <th>学号</th>
+                <th>特别关心</th>
+                <th>黑名单</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="contact-list">
+            <!-- 联系人列表将由 JavaScript 动态填充 -->
+        </tbody>
+    </table>
+
+    <script src="static/js/scripts.js"></script> <!-- 直接引用静态资源 -->
+</body>
+</html>
