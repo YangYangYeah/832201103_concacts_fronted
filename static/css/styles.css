@@ -1,37 +1,75 @@
+/* 设置 canvas 全屏显示以展示烟花效果 */
+#fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* 禁止与 canvas 进行交互 */
+    z-index: -1; /* 将 canvas 放在背景 */
+}
+
+/* 使用引入的 Lobster 艺术字体 */
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #000; /* 设置黑色背景 */
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
 }
+
 
 h1 {
-    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #007BFF;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Lobster', cursive; /* 使用艺术字体 */
+    font-size: 36px;
 }
 
+/* 添加联系人表单的调整 */
 form {
-    margin: 20px 0;
-    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    padding: 10px;
     background-color: #ffffff;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 form label {
-    margin-right: 10px;
+    margin-right:10 px; /* 调整标签和输入框间距 */
+    font-weight: bold;
 }
 
 form input {
-    margin-right: 20px;
+    margin-right: 10px;
     padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 form button {
-    padding: 5px 10px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+form button:hover {
+    background: #0056b3;
+}
+
+/* 表格样式调整 */
 table {
     width: 80%;
     border-collapse: collapse;
@@ -42,29 +80,96 @@ table {
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px;
     text-align: center;
     border: 1px solid #ddd;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #007BFF;
+    color: white;
 }
 
-.action-buttons {
-    display: none;
-}
-
-.contact:hover .action-buttons {
-    display: block;
-}
-
-.action-buttons button {
-    margin: 0 5px;
-    padding: 5px 10px;
-    cursor: pointer;
+td {
+    background-color: #f9f9f9;
 }
 
 .special-care {
-    color: pink;  /* 将特别关心联系人的姓名显示为粉色 */
+    color: #FF1493;  /* 将特别关心的姓名显示为更亮眼的粉色 */
+}
+
+/* 中心对齐的操作按钮 */
+.action-buttons {
+    display: flex;
+    justify-content: center; /* 确保按钮居中对齐 */
+    align-items: center; /* 垂直居中 */
+    height: 100%; /* 确保 action-buttons 高度与单元格一致 */
+}
+.action-buttons button {
+    margin: 0 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.action-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* 针对黑名单表格的调整 */
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 调整按钮的位置和样式 */
+button {
+    margin-top: 10px;
+    display: block;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 将按钮所在的单元格内容居中 */
+.center-button {
+    text-align: center;
+}
+
+/* 让按钮在单元格中居中对齐 */
+.center-button button {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.center-button button:hover {
+    background-color: #0056b3;
 }

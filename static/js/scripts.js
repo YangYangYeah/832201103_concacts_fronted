@@ -88,9 +88,11 @@ function updateContactField(id, updatedData) {
 
 // 加载黑名单联系人
 function loadBlacklist() {
+    document.getElementById('loading').style.display = 'block'; // 显示加载动画
     fetch(`${BASE_URL}/blacklist_contacts`)
         .then(response => response.json())
         .then(data => {
+            document.getElementById('loading').style.display = 'none'; // 隐藏加载动画
             const blacklistList = document.getElementById('blacklist-list');
             blacklistList.innerHTML = ''; // 清空列表，避免重复渲染
             data.forEach(contact => {
@@ -101,26 +103,36 @@ function loadBlacklist() {
                     <td>${contact.name}</td>
                     <td>${contact.phone}</td>
                     <td>${contact.student_id}</td>
-                    <td>
+                    <td class="center-button"> <!-- 使用CSS类来控制居中 -->
                         <button onclick="toggleBlacklist(${contact.id})">移出黑名单</button>
                     </td>
                 `;
                 blacklistList.appendChild(row);
             });
         })
-        .catch(error => console.error('Error fetching blacklist contacts:', error));
+        .catch(error => {
+            document.getElementById('loading').style.display = 'none'; // 如果发生错误，隐藏加载动画
+            console.error('Error fetching blacklist contacts:', error);
+        });
 }
+
+
 
 // 加载所有联系人并更新表格
 function loadContacts() {
+    document.getElementById('loading').style.display = 'block'; // 显示加载动画
     fetch(`${BASE_URL}/contacts`)
         .then(response => response.json())
         .then(data => {
+            document.getElementById('loading').style.display = 'none'; // 隐藏加载动画
             const contactList = document.getElementById('contact-list');
             contactList.innerHTML = '';
             data.forEach(contact => {
                 const row = document.createElement('tr');
                 row.className = 'contact';
+                if (contact.special_care) {
+                    row.classList.add('special-care-row');  // 给特别关心的联系人行加上特殊类
+                }
                 row.innerHTML = `
                     <td class="${contact.special_care ? 'special-care' : ''}">${contact.name}</td>
                     <td>${contact.phone}</td>
@@ -129,17 +141,20 @@ function loadContacts() {
                     <td>${contact.blacklist ? '是' : '否'}</td>
                     <td>
                         <div class="action-buttons">
-                            <button onclick="deleteContact(${contact.id})">删除</button>
-                            <button onclick="toggleSpecialCare(${contact.id})">${contact.special_care ? '取消特别关心' : '特别关心'}</button>
-                            <button onclick="toggleBlacklist(${contact.id})">${contact.blacklist ? '移出黑名单' : '黑名单'}</button>
-                            <button onclick="editContact(${contact.id})">编辑</button> <!-- 新增编辑按钮 -->
+                            <button class="delete" onclick="deleteContact(${contact.id})">删除</button>
+                            <button class="special-care" onclick="toggleSpecialCare(${contact.id})">${contact.special_care ? '取消特别关心' : '特别关心'}</button>
+                            <button class="blacklist" onclick="toggleBlacklist(${contact.id})">${contact.blacklist ? '移出黑名单' : '黑名单'}</button>
+                            <button class="edit" onclick="editContact(${contact.id})">编辑</button>
                         </div>
                     </td>
                 `;
                 contactList.appendChild(row);
             });
         })
-        .catch(error => console.error('Error fetching contacts:', error));
+        .catch(error => {
+            document.getElementById('loading').style.display = 'none'; // 如果发生错误，隐藏加载动画
+            console.error('Error fetching contacts:', error);
+        });
 }
 
 // 添加联系人
